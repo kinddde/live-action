@@ -31,7 +31,7 @@ jobs:
     - name: install
       run: |
          cd ${{ secrets.GH_DIR }}
-         npm install
+         yarn install
          npm run build
          node build/app.js
 
