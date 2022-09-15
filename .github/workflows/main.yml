@@ -38,6 +38,7 @@ jobs:
           git add .
           git commit -m "bot action" -a
           git pull
+          ls
           
     - name: Push Change
       uses: ad-m/github-push-action@master
