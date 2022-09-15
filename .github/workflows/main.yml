@@ -23,10 +23,11 @@ jobs:
       with:
           node-version: 16
       
-    - name: install
+    - name: download
       run: |
-          cd ${{ secrets.GH_DIR }}
-          ffprobe
+          sudo apt install ffmpeg
+          ffmpeg -version
+          fprobeg -version
           
     - name: Commit Change
       run: |
