@@ -3,7 +3,7 @@ on:
     branches:
       - "main"
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */12 * * *"
     
   workflow_dispatch:
 
@@ -23,10 +23,6 @@ jobs:
       with:
           node-version: 16
       
-    - name: download
-      run: |
-          sudo apt install ffmpeg
-          ffmpeg -version
           
     - name: install
       run: |
