@@ -26,6 +26,7 @@ jobs:
     - name: download
       run: |
           sudo apt install ffmpeg
+          sudo apt install fprobeg
           ffmpeg -version
           fprobeg -version
           
