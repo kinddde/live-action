@@ -38,10 +38,11 @@ jobs:
           git add .
           git commit -m "bot action" -a
           git pull
+          
     - name: Push Change
       uses: ad-m/github-push-action@master
       with:
-        github_token: "${{ secrets.GH_PAT }}"
+        github_token: ${{ secrets.GH_PAT }}
         branch: 'main'
         repository: '${{secrets.GH_RPO}}'
         directory: "${{ secrets.GH_DIR }}"
