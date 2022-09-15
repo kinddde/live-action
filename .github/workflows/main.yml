@@ -22,13 +22,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
           node-version: 16
-          
+      
     - name: install
       run: |
-         cd ${{ secrets.GH_DIR }}
-         yarn install
-         npm run build
-         node build/app.js
+          cd ${{ secrets.GH_DIR }}
+          ffprobe
           
     - name: Commit Change
       run: |
