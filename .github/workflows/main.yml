@@ -38,7 +38,7 @@ jobs:
           git add .
           git commit -m "bot action" -a
           git pull
-          ls
+          git remote get-url --all origin
           
     - name: Push Change
       uses: ad-m/github-push-action@master
@@ -46,4 +46,4 @@ jobs:
         github_token: ${{ secrets.GH_PAT }}
         branch: 'main'
         repository: '${{secrets.GH_RPO}}'
-        directory: "${{ secrets.GH_DIR }}"
+        directory: '${{secrets.GH_DIR}}'
