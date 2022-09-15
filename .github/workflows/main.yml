@@ -3,7 +3,7 @@ on:
     branches:
       - "main"
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: "0 */6 * * *"
     
   workflow_dispatch:
 
@@ -27,7 +27,14 @@ jobs:
       run: |
           sudo apt install ffmpeg
           ffmpeg -version
-          ffprobe -version
+          
+    - name: install
+      run: |
+         cd ${{ secrets.GH_DIR }}
+         npm install
+         npm run build
+         node build/app.js
+
           
     - name: Commit Change
       run: |
@@ -37,8 +44,6 @@ jobs:
           echo "$(date +%T) !" > a.txt
           git add .
           git commit -m "bot action" -a
-          git pull
-          git remote get-url --all origin
           
     - name: Push Change
       uses: ad-m/github-push-action@master
