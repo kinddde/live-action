@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - "main"
+  schedule:
+    - cron: "0 */3 * * *"
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+       repository: ${{ secrets.GH_RPO }}
+       token: ${{ secrets.GH_PAT }}
+       path: ${{ secrets.GH_DIR }}
+       submodules: "true" 
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+          node-version: 16
+          
+    - name: install
+      run: |
+         cd ${{ secrets.GH_DIR }}
+         yarn install
+         npm run build
+         node build/app.js
+          
+    - name: Commit Change
+      run: |
+          cd ${{ secrets.GH_DIR }}
+          git config --local user.email "${{ secrets.EMAIL }}"
+          git config --local user.name "${{ secrets.USERNAME }}"
+          echo "$(date +%T) !" > a.txt
+          git add .
+          git commit -m "bot action" -a
+          git pull
+    - name: Push Change
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GH_PAT }}
+        branch: 'main'
+        repository: '${{secrets.GH_RPO}}'
+        directory: "${{ secrets.GH_DIR }}"
